@@ -17,7 +17,7 @@ body {
 }
 
 // Disable pointer events for containers to allow playing with background
-div:not(.content),
+div:not(.content-wrapper),
 nav,
 ul,
 section {
