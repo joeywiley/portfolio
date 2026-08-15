@@ -84,7 +84,6 @@ onUnmounted(() => document.removeEventListener('click', handleAnchorClick))
   scroll-snap-type: y mandatory;
   scrollbar-color: $scrollbar transparent;
   scrollbar-width: thin;
-  touch-action: pan-y;
   pointer-events: auto;
 }
 
