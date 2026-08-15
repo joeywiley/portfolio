@@ -7,7 +7,7 @@ import TitlePage from '@/components/section/title/TitlePage.vue'
 import WorkSection from '@/components/section/work/WorkSection.vue'
 import AboutSection from '@/components/section/about/AboutSection.vue'
 import ContactSection from '@/components/section/contact/ContactSection.vue'
-import ScrollButton from './components/common/ScrollButton.vue'
+import ScrollButton from '@/components/common/ScrollButton.vue'
 
 const canvasRef = ref<InstanceType<typeof ParticleCanvas> | null>(null)
 const titleRef = ref<HTMLElement | null>(null)

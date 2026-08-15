@@ -3,20 +3,18 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
 </script>
 
 <template>
-  <section id="title" class="title-page">
-    <div class="hero">
-      <span class="degree">Electrical Engineering Major</span>
-      <h1>Some blurb about me <em>right</em> here.</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in diam fermentum felis finibus placerat quis id velit.</p>
-      <div class="actions">
-        <a href="#work" class="btn-primary">See my work</a>
-        <a href="#contact" class="btn-secondary">Get in touch</a>
-      </div>
-      <div class="scroll-cue"></div>
+  <div class="hero">
+    <span class="degree">Electrical Engineering Major</span>
+    <h1>Some blurb about me <em>right</em> here.</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in diam fermentum felis finibus placerat quis id velit.</p>
+    <div class="actions">
+      <a href="#work" class="btn-primary">See my work</a>
+      <a href="#contact" class="btn-secondary">Get in touch</a>
     </div>
+    <div class="scroll-cue"></div>
+  </div>
 
-    <ScrollButton class="scroll-hint" icon="keyboard_arrow_down" label="SCROLL" , section="work" />
-  </section>
+  <ScrollButton class="scroll-hint" icon="keyboard_arrow_down" label="SCROLL" , section="work" />
 </template>
 
 <style lang="scss" scoped>
