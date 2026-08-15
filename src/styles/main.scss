@@ -17,7 +17,23 @@ body {
 }
 
 // Disable pointer events for containers to allow playing with background
-div:not(.content-wrapper),
+@media (hover: hover) and (pointer: fine) {
+  div,
+  nav,
+  ul,
+  section {
+    pointer-events: none;
+  }
+
+  div > *:not(div, nav, ul, section),
+  nav > *:not(div, nav, ul, section),
+  ul > *:not(div, nav, ul, section),
+  section > *:not(div, nav, ul, section) {
+    pointer-events: auto;
+  }
+}
+
+div,
 nav,
 ul,
 section {

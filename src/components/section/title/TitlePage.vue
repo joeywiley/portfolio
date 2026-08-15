@@ -18,10 +18,6 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
 </template>
 
 <style lang="scss" scoped>
-.title-page {
-  scroll-snap-align: start;
-}
-
 .hero {
   display: flex;
   flex-direction: column;
