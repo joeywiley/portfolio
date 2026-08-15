@@ -35,6 +35,7 @@ nav {
 .nav-links {
   display: flex;
   gap: 36px;
+  margin-left: 36px;
 
   a {
     position: relative;

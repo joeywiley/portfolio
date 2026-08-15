@@ -119,6 +119,17 @@ function handleMouseUp() {
   mouse_down = false
 }
 
+function handleTouchMove(event: TouchEvent) {
+  const touch = event.touches[0]
+  if (!touch) return
+
+  const canvas = canvasRef!.value!
+  const rect = canvas.getBoundingClientRect()!
+  mouse_x = touch.clientX - rect.left
+  mouse_y = touch.clientY - rect.top
+  mouse_init = true
+}
+
 function handleScroll(el: HTMLDivElement) {
   if (!scroll_init) {
     scroll_pos = el.scrollTop
@@ -195,12 +206,14 @@ onMounted(() => {
   animate()
   window.addEventListener('resize', resizeCanvas)
   window.addEventListener('mousemove', handleMouseMove)
+  window.addEventListener('touchmove', handleTouchMove, { passive: true })
 })
 
 onUnmounted(() => {
   cancelAnimationFrame(current_animation_frame)
   window.removeEventListener('resize', resizeCanvas)
   window.removeEventListener('mousemove', handleMouseMove)
+  window.removeEventListener('touchmove', handleTouchMove)
 })
 
 defineExpose({ handleScroll, handleMouseDown, handleMouseUp })
