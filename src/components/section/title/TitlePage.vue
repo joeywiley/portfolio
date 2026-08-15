@@ -1,7 +1,9 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import ScrollButton from '@/components/common/ScrollButton.vue'
+</script>
 
 <template>
-  <section class="title-page h-lvh">
+  <section id="title" class="title-page">
     <div class="hero">
       <span class="degree">Electrical Engineering Major</span>
       <h1>Some blurb about me <em>right</em> here.</h1>
@@ -13,10 +15,7 @@
       <div class="scroll-cue"></div>
     </div>
 
-    <a href="#work" class="scroll-hint btn-quaternary">
-      <span class="material-symbols-rounded">keyboard_arrow_down</span>
-      <span>SCROLL</span>
-    </a>
+    <ScrollButton class="scroll-hint" icon="keyboard_arrow_down" label="SCROLL" , section="work" />
   </section>
 </template>
 
@@ -81,14 +80,8 @@
 }
 
 .scroll-hint {
-  display: flex;
   position: absolute;
   bottom: 24px;
   left: 48px;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.1rem;
-  font-family: $font-mono;
-  letter-spacing: 0.1em;
 }
 </style>
