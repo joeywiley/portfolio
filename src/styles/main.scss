@@ -1,5 +1,9 @@
+html,
+body {
+  height: 100vh;
+}
+
 html {
-  min-height: 100lvh;
   overflow-x: hidden;
   overflow-y: scroll;
   scroll-behavior: smooth;
