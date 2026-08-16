@@ -1,20 +1,18 @@
 <template>
   <ParticleCanvas ref="canvasRef" class="particle-canvas" />
-  <div class="scroll-wrapper" @scroll="handleScroll">
-    <div class="content-wrapper" @mousedown.self="handleMouseDown" @mouseup="handleMouseUp">
-      <SiteHeader />
-      <section id="title" ref="titleRef" class="title-page">
-        <TitlePage />
-      </section>
-      <section id="content">
-        <WorkSection />
-        <AboutSection />
-        <ContactSection />
-      </section>
-      <Transition name="fade">
-        <ScrollButton class="top-button" icon="keyboard_arrow_up" label="TOP" section="title" v-if="showTopButton" />
-      </Transition>
-    </div>
+  <div class="content-wrapper" @mousedown.self="handleMouseDown" @mouseup="handleMouseUp">
+    <SiteHeader />
+    <section id="title" ref="titleRef" class="title-page">
+      <TitlePage />
+    </section>
+    <section id="content">
+      <WorkSection />
+      <AboutSection />
+      <ContactSection />
+    </section>
+    <Transition name="fade">
+      <ScrollButton class="top-button" icon="keyboard_arrow_up" label="TOP" section="title" v-if="showTopButton" />
+    </Transition>
   </div>
 </template>
 
@@ -33,11 +31,9 @@ const canvasRef = ref<InstanceType<typeof ParticleCanvas> | null>(null)
 const titleRef = ref<HTMLElement | null>(null)
 const showTopButton = ref(false)
 
-function handleScroll(event: Event) {
-  const el = event.target as HTMLDivElement
-  canvasRef.value!.handleScroll(el)
-
-  showTopButton.value = el.scrollTop > titleRef.value!.offsetHeight
+function handleScroll() {
+  canvasRef.value!.handleScroll()
+  showTopButton.value = document.documentElement.scrollTop > titleRef.value!.offsetHeight
 }
 
 function handleMouseDown(event: Event) {
@@ -62,47 +58,40 @@ function handleAnchorClick(event: Event) {
   }
 }
 
-onMounted(() => document.addEventListener('click', handleAnchorClick))
-onUnmounted(() => document.removeEventListener('click', handleAnchorClick))
+onMounted(() => {
+  document.addEventListener('click', handleAnchorClick)
+  document.addEventListener('scroll', handleScroll)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', handleAnchorClick)
+  document.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style lang="scss" scoped>
 .particle-canvas {
-  position: absolute;
-  z-index: 0;
+  position: fixed;
+  z-index: -10;
   width: 100lvw;
   height: 100lvh;
 }
 
-.scroll-wrapper {
-  position: relative;
-  z-index: 10;
+.content-wrapper {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  scrollbar-color: $scrollbar transparent;
-  scrollbar-width: thin;
+  height: auto;
   touch-action: pan-y;
   pointer-events: auto;
 }
 
-.content-wrapper {
-  width: 100%;
-  height: auto;
-  pointer-events: auto;
-}
-
+#title,
 #content {
   scroll-snap-align: start;
 }
 
 .title-page {
   height: 100lvh;
-  scroll-snap-align: start;
 }
 
 .top-button {

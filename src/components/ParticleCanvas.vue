@@ -134,15 +134,15 @@ function handleTouchMove(event: TouchEvent) {
   mouse_init = true
 }
 
-function handleScroll(el: HTMLDivElement) {
+function handleScroll() {
   if (!scroll_init) {
-    scroll_pos = el.scrollTop
+    scroll_pos = document.documentElement.scrollTop
     scroll_init = true
     return
   }
 
   scroll_pos_prev = scroll_pos
-  scroll_pos = el.scrollTop
+  scroll_pos = document.documentElement.scrollTop
   const scroll_adjustment = (scroll_pos_prev - scroll_pos) * SCROLL_STRENGTH
 
   for (const particle of particles) {
@@ -169,8 +169,8 @@ const scale = (input: number, input_min: number, input_max: number, output_min: 
 function resizeCanvas() {
   const canvas = canvasRef.value!
 
-  width = document.body.clientWidth
-  height = document.body.clientHeight
+  width = canvasRef.value!.clientWidth
+  height = canvasRef.value!.clientHeight
   const dpr = window.devicePixelRatio || 1
   const num_particles = width * height * (DENSITY / 10000)
 

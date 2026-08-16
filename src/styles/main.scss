@@ -1,19 +1,18 @@
 html {
   min-height: 100lvh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scrollbar-color: $scrollbar transparent;
   color-scheme: dark;
   font-size: 62.5%;
 }
 
 body {
   background: $bg;
-  height: 100%;
-  overflow-x: hidden;
   color: $text-primary;
   font-family: 'Inter', sans-serif;
-}
-
-#app {
-  height: 100%;
 }
 
 // Disable pointer events for containers to allow playing with background
