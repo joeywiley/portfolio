@@ -77,6 +77,8 @@ onUnmounted(() => document.removeEventListener('click', handleAnchorClick))
 .scroll-wrapper {
   position: relative;
   z-index: 10;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
   width: 100%;
   height: 100%;
   overflow-y: scroll;
