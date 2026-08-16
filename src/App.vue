@@ -45,25 +45,10 @@ function handleMouseUp() {
   canvasRef.value!.handleMouseUp()
 }
 
-function handleAnchorClick(event: Event) {
-  const target = event.target as HTMLElement
-  const link = target.closest('a[href^="#"]')
-  if (!link) return
-
-  event.preventDefault()
-  const id = link.getAttribute('href')!.slice(1)
-  const el = document.getElementById(id)
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth' })
-  }
-}
-
 onMounted(() => {
-  document.addEventListener('click', handleAnchorClick)
   document.addEventListener('scroll', handleScroll)
 })
 onUnmounted(() => {
-  document.removeEventListener('click', handleAnchorClick)
   document.removeEventListener('scroll', handleScroll)
 })
 </script>
