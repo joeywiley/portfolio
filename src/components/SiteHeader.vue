@@ -1,5 +1,3 @@
-<script lang="ts" setup></script>
-
 <template>
   <nav>
     <span class="nav-name">Joey Wiley</span>
@@ -10,6 +8,8 @@
     </ul>
   </nav>
 </template>
+
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
 nav {

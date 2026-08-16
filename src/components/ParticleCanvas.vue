@@ -1,3 +1,7 @@
+<template>
+  <canvas ref="canvasRef"></canvas>
+</template>
+
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
@@ -218,9 +222,5 @@ onUnmounted(() => {
 
 defineExpose({ handleScroll, handleMouseDown, handleMouseUp })
 </script>
-
-<template>
-  <canvas ref="canvasRef"></canvas>
-</template>
 
 <style lang="scss" scoped></style>

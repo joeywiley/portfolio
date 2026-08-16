@@ -1,3 +1,10 @@
+<template>
+  <a :href="'#' + props.section" class="scroll-hint btn-quaternary">
+    <span class="material-symbols-rounded">{{ props.icon }}</span>
+    <span>{{ props.label }}</span>
+  </a>
+</template>
+
 <script lang="ts" setup>
 const props = defineProps({
   icon: String,
@@ -5,13 +12,6 @@ const props = defineProps({
   section: String,
 })
 </script>
-
-<template>
-  <a :href="'#' + props.section" class="scroll-hint btn-quaternary">
-    <span class="material-symbols-rounded">{{ props.icon }}</span>
-    <span>{{ props.label }}</span>
-  </a>
-</template>
 
 <style lang="scss" scoped>
 .scroll-hint {

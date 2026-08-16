@@ -1,7 +1,3 @@
-<script lang="ts" setup>
-import ScrollButton from '@/components/common/ScrollButton.vue'
-</script>
-
 <template>
   <div class="hero">
     <span class="degree">Electrical Engineering Major</span>
@@ -16,6 +12,10 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
 
   <ScrollButton class="scroll-hint" icon="keyboard_arrow_down" label="SCROLL" section="work" />
 </template>
+
+<script lang="ts" setup>
+import ScrollButton from '@/components/common/ScrollButton.vue'
+</script>
 
 <style lang="scss" scoped>
 .hero {
