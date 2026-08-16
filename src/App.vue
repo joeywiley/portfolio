@@ -85,11 +85,6 @@ onUnmounted(() => {
   pointer-events: auto;
 }
 
-#title,
-#content {
-  scroll-snap-align: start;
-}
-
 .title-page {
   height: 100lvh;
 }
