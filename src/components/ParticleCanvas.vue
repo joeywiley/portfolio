@@ -167,6 +167,7 @@ const scale = (input: number, input_min: number, input_max: number, output_min: 
 }
 
 function resizeCanvas() {
+  console.log('Hello')
   const canvas = canvasRef.value!
 
   width = canvasRef.value!.clientWidth
@@ -176,8 +177,6 @@ function resizeCanvas() {
 
   canvas.width = width * dpr
   canvas.height = height * dpr
-  canvas.style.width = `${width}px`
-  canvas.style.height = `${height}px`
 
   ctx = canvas.getContext('2d', { alpha: false })!
   ctx.scale(dpr, dpr)
