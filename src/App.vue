@@ -1,3 +1,23 @@
+<template>
+  <ParticleCanvas ref="canvasRef" class="particle-canvas" />
+  <div class="scroll-wrapper" @scroll="handleScroll">
+    <div class="content-wrapper" @mousedown.self="handleMouseDown" @mouseup="handleMouseUp">
+      <SiteHeader />
+      <section id="title" ref="titleRef" class="title-page">
+        <TitlePage />
+      </section>
+      <section id="content">
+        <WorkSection />
+        <AboutSection />
+        <ContactSection />
+      </section>
+      <Transition name="fade">
+        <ScrollButton class="top-button" icon="keyboard_arrow_up" label="TOP" section="title" v-if="showTopButton" />
+      </Transition>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
@@ -45,26 +65,6 @@ function handleAnchorClick(event: Event) {
 onMounted(() => document.addEventListener('click', handleAnchorClick))
 onUnmounted(() => document.removeEventListener('click', handleAnchorClick))
 </script>
-
-<template>
-  <ParticleCanvas ref="canvasRef" class="particle-canvas" />
-  <div class="scroll-wrapper" @scroll="handleScroll">
-    <div class="content-wrapper" @mousedown.self="handleMouseDown" @mouseup="handleMouseUp">
-      <SiteHeader />
-      <section id="title" ref="titleRef" class="title-page">
-        <TitlePage />
-      </section>
-      <section id="content">
-        <WorkSection />
-        <AboutSection />
-        <ContactSection />
-      </section>
-      <Transition name="fade">
-        <ScrollButton class="top-button" icon="keyboard_arrow_up" label="TOP" section="title" v-if="showTopButton" />
-      </Transition>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .particle-canvas {
