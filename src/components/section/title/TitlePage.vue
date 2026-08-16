@@ -14,7 +14,7 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
     <div class="scroll-cue"></div>
   </div>
 
-  <ScrollButton class="scroll-hint" icon="keyboard_arrow_down" label="SCROLL" , section="work" />
+  <ScrollButton class="scroll-hint" icon="keyboard_arrow_down" label="SCROLL" section="work" />
 </template>
 
 <style lang="scss" scoped>
