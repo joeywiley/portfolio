@@ -49,6 +49,11 @@ section > *:not(div, nav, ul, section) {
   pointer-events: auto;
 }
 
+section:not(#title) {
+  margin-top: 60px;
+  scroll-margin-top: 60px;
+}
+
 section:focus {
   outline: none;
 }
