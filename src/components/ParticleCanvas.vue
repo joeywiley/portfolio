@@ -7,17 +7,29 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
-const DENSITY = 1
+const PARTICLE_CONFIG = {
+  particle_density: 1, // per 10,000 px^2
+  size: 4, // px
+} as const
 
-const INITIAL_SPEED_MULTIPLIER = 0.0003
-const SPEED_MULTIPLIER = 0.3
-const MIN_FRICTION = 0.9
-const MAX_FRICTION = 0.75
+const DEPTH_PHYSICS = {
+  base_speed_near: 0.00009,
+  base_speed_far: 0,
+  friction_near: 0.9,
+  friction_far: 0.75,
+} as const
 
-const PULL_STRENGTH = 0.04
-const PULL_RADIUS = 500
-const INTERACT_MULTIPLIER = 4
-const SCROLL_STRENGTH = 0.0001
+const INTERACTION_CONFIG = {
+  pull_strength: 0.01,
+  pull_radius: 500, // px
+  drag_strength_mul: 4,
+  scroll_strength: 0.0001,
+} as const
+
+const COLOR_CONFIG = {
+  hue: 1,
+  saturation: 0, // %
+} as const
 
 let resize_observer: ResizeObserver | null = null
 
@@ -29,7 +41,6 @@ let mouse_y_prev = 0
 let mouse_x = 0
 let mouse_y = 0
 let mouse_down = false
-let mouse_init = false
 
 let scroll_pos = 0
 let scroll_pos_prev = 0
@@ -49,10 +60,12 @@ let ctx: CanvasRenderingContext2D | null = null
 
 function createParticles(quantity: number): Particle[] {
   const particles: Particle[] = []
+  const speedRange = DEPTH_PHYSICS.base_speed_far - DEPTH_PHYSICS.base_speed_near
+
   for (let i = 0; i < quantity; i++) {
     const z = Math.random()
-    const dx = (Math.random() - 0.5) * INITIAL_SPEED_MULTIPLIER * (1 - z)
-    const dy = (Math.random() - 0.5) * INITIAL_SPEED_MULTIPLIER * (1 - z)
+    const dx = (Math.random() - 0.5) * 2 * speedRange * (1 - z)
+    const dy = (Math.random() - 0.5) * 2 * speedRange * (1 - z)
 
     particles.push({
       x: Math.random(),
@@ -67,25 +80,23 @@ function createParticles(quantity: number): Particle[] {
 }
 
 function updateParticles() {
-  const mouse_vel_x = mouse_init ? mouse_x - mouse_x_prev : 0
-  const mouse_vel_y = mouse_init ? mouse_y - mouse_y_prev : 0
+  const mouse_vel_x = mouse_x - mouse_x_prev
+  const mouse_vel_y = mouse_y - mouse_y_prev
   mouse_x_prev = mouse_x
   mouse_y_prev = mouse_y
 
   for (const particle of particles) {
-    if (mouse_init) {
-      const px = particle.x * width
-      const py = particle.y * height
-      const distance = Math.sqrt((px - mouse_x) ** 2 + (py - mouse_y) ** 2)
-      const distance_scale = 1 - scale(distance, 0, PULL_RADIUS, 0, 1) // far particles respond less
-      const depth_resistance = 1 - particle.z // deep particles respond less
-      const mouse_down_multiplier = mouse_down ? INTERACT_MULTIPLIER : 1
+    const px = particle.x * width
+    const py = particle.y * height
+    const distance = Math.sqrt((px - mouse_x) ** 2 + (py - mouse_y) ** 2)
+    const distance_scale = 1 - scale(distance, 0, INTERACTION_CONFIG.pull_radius, 0, 1) // far particles respond less
+    const depth_resistance = 1 - particle.z // deep particles respond less
+    const mouse_down_multiplier = mouse_down ? INTERACTION_CONFIG.drag_strength_mul : 1
 
-      particle.dx += (mouse_vel_x / width) * distance_scale * depth_resistance * PULL_STRENGTH * mouse_down_multiplier
-      particle.dy += (mouse_vel_y / height) * distance_scale * depth_resistance * PULL_STRENGTH * mouse_down_multiplier
-    }
+    particle.dx += (mouse_vel_x / width) * distance_scale * depth_resistance * INTERACTION_CONFIG.pull_strength * mouse_down_multiplier
+    particle.dy += (mouse_vel_y / height) * distance_scale * depth_resistance * INTERACTION_CONFIG.pull_strength * mouse_down_multiplier
 
-    const friction = MIN_FRICTION + (MAX_FRICTION - MIN_FRICTION) * particle.z
+    const friction = DEPTH_PHYSICS.friction_near + (DEPTH_PHYSICS.friction_far - DEPTH_PHYSICS.friction_near) * particle.z
     const current_speed = Math.sqrt(particle.dx ** 2 + particle.dy ** 2)
     const adjusted_speed = current_speed * friction
     if (adjusted_speed <= particle.min_speed) {
@@ -97,11 +108,11 @@ function updateParticles() {
       particle.dy *= friction
     }
 
-    particle.x += particle.dx * SPEED_MULTIPLIER
+    particle.x += particle.dx
     if (particle.x > 1) particle.x = 0
     else if (particle.x < 0) particle.x = 1
 
-    particle.y += particle.dy * SPEED_MULTIPLIER
+    particle.y += particle.dy
     if (particle.y > 1) particle.y = 0
     else if (particle.y < 0) particle.y = 1
   }
@@ -114,7 +125,11 @@ function handleMouseMove(event: MouseEvent) {
   const rect = canvas.getBoundingClientRect()!
   mouse_x = event.clientX - rect.left
   mouse_y = event.clientY - rect.top
-  mouse_init = true
+
+  if (Math.sqrt((mouse_x - mouse_x_prev) ** 2 + (mouse_y - mouse_y_prev) ** 2) > 100) {
+    mouse_x_prev = mouse_x
+    mouse_y_prev = mouse_y
+  }
 }
 
 function handleMouseDown() {
@@ -134,7 +149,7 @@ function handleScroll() {
 
   scroll_pos_prev = scroll_pos
   scroll_pos = document.documentElement.scrollTop
-  const scroll_adjustment = (scroll_pos_prev - scroll_pos) * SCROLL_STRENGTH
+  const scroll_adjustment = (scroll_pos_prev - scroll_pos) * INTERACTION_CONFIG.scroll_strength
 
   for (const particle of particles) {
     particle.dy += scroll_adjustment
@@ -172,7 +187,7 @@ function resizeCanvas() {
   ctx = canvas.getContext('2d', { alpha: true })!
   ctx.scale(dpr, dpr)
 
-  const num_particles = width * height * (DENSITY / 10000)
+  const num_particles = width * height * (PARTICLE_CONFIG.particle_density / 10000)
   if (particles.length == 0) {
     particles = createParticles(num_particles)
   } else if (particles.length > num_particles) {
@@ -191,8 +206,8 @@ function resizeCanvas() {
 function draw() {
   ctx!.clearRect(0, 0, width, height)
   for (const particle of particles) {
-    ctx!.fillStyle = `hsl(1, 0%, ${(1 - particle.z) * 100}%)`
-    ctx!.fillRect(particle.x * width, particle.y * height, 4, 4)
+    ctx!.fillStyle = `hsl(${COLOR_CONFIG.hue}, ${COLOR_CONFIG.saturation}%, ${(1 - particle.z) * 100}%)`
+    ctx!.fillRect(particle.x * width, particle.y * height, PARTICLE_CONFIG.size, PARTICLE_CONFIG.size)
   }
 }
 
