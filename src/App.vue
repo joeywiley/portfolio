@@ -47,11 +47,32 @@ function handleMouseUp() {
   canvasRef.value!.handleMouseUp()
 }
 
+function handleAnchorClick(event: Event) {
+  if (!(event.target instanceof Element)) return
+
+  const link = event.target.closest('a[href^="#"]')
+  if (!link) return
+
+  const href = link.getAttribute('href')
+  if (!href) return
+
+  const target = document.getElementById(decodeURIComponent(href.slice(1)))
+  if (!target) return
+
+  event.preventDefault()
+  target.scrollIntoView()
+  target.setAttribute('tabindex', '-1')
+  target.focus({ preventScroll: true })
+}
+
 onMounted(() => {
   document.addEventListener('scroll', handleScroll)
+  document.addEventListener('click', handleAnchorClick)
 })
+
 onUnmounted(() => {
   document.removeEventListener('scroll', handleScroll)
+  document.removeEventListener('click', handleAnchorClick)
 })
 </script>
 
