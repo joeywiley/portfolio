@@ -87,6 +87,7 @@ section:focus {
   font-weight: 500;
   font-size: 1.4rem;
   font-family: $font-body;
+  text-shadow: $shadow;
 
   // Extend clickable boundary
   &::after {
@@ -125,6 +126,7 @@ section:focus {
   font-size: 1.4rem;
   font-family: $font-body;
   letter-spacing: 0.01em;
+  text-shadow: $shadow;
 
   // Extend clickable boundary
   &::after {
@@ -145,6 +147,7 @@ section:focus {
   position: relative;
   transition: color 0.2s ease;
   color: $text-tertiary;
+  text-shadow: $shadow;
 
   &::after {
     position: absolute;
