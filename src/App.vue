@@ -35,7 +35,7 @@ const showTopButton = ref(false)
 
 function handleScroll() {
   canvasRef.value!.handleScroll()
-  showTopButton.value = document.documentElement.scrollTop > titleRef.value!.offsetHeight * 0.9
+  showTopButton.value = document.documentElement.scrollTop > titleRef.value!.offsetHeight * 0.5
 }
 
 function handleMouseDown(event: Event) {
@@ -104,8 +104,8 @@ onUnmounted(() => {
 
 .top-button {
   position: fixed;
-  right: 48px;
-  bottom: 24px;
+  right: $gutters-h;
+  bottom: $gutters-v;
 }
 
 .fade-enter-active,
