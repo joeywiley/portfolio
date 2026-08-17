@@ -10,6 +10,12 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 const PARTICLE_CONFIG = {
   particle_density: 1, // per 10,000 px^2
   size: 4, // px
+  colors: [
+    { hex: '#ffffff', weight: 85 },
+    { hex: '#ffddcc', weight: 5 },
+    { hex: '#cceeff', weight: 5 },
+    { hex: '#ebe5ff', weight: 5 },
+  ],
 } as const
 
 const DEPTH_PHYSICS = {
@@ -24,11 +30,6 @@ const INTERACTION_CONFIG = {
   pull_radius: 500, // px
   drag_strength_mul: 4,
   scroll_strength: 0.0001,
-} as const
-
-const COLOR_CONFIG = {
-  hue: 1,
-  saturation: 0, // %
 } as const
 
 let resize_observer: ResizeObserver | null = null
@@ -53,10 +54,23 @@ interface Particle {
   dx: number
   dy: number
   min_speed: number
+  color: string
 }
 
 let particles: Particle[] = []
 let ctx: CanvasRenderingContext2D | null = null
+
+function pickWeightedColor() {
+  const total = PARTICLE_CONFIG.colors.reduce((sum, color) => sum + color.weight, 0)
+  let roll = Math.random() * total
+
+  for (const color of PARTICLE_CONFIG.colors) {
+    roll -= color.weight
+    if (roll <= 0) return color.hex
+  }
+
+  return PARTICLE_CONFIG.colors[PARTICLE_CONFIG.colors.length - 1]!.hex
+}
 
 function createParticles(quantity: number): Particle[] {
   const particles: Particle[] = []
@@ -74,6 +88,7 @@ function createParticles(quantity: number): Particle[] {
       dx: dx,
       dy: dy,
       min_speed: Math.sqrt(dx ** 2 + dy ** 2),
+      color: pickWeightedColor(),
     })
   }
   return particles
@@ -205,10 +220,13 @@ function resizeCanvas() {
 
 function draw() {
   ctx!.clearRect(0, 0, width, height)
+  ctx?.save()
   for (const particle of particles) {
-    ctx!.fillStyle = `hsl(${COLOR_CONFIG.hue}, ${COLOR_CONFIG.saturation}%, ${(1 - particle.z) * 100}%)`
+    ctx!.fillStyle = particle.color
+    ctx!.globalAlpha = 1 - particle.z
     ctx!.fillRect(particle.x * width, particle.y * height, PARTICLE_CONFIG.size, PARTICLE_CONFIG.size)
   }
+  ctx?.restore()
 }
 
 onMounted(() => {
