@@ -49,6 +49,10 @@ section > *:not(div, nav, ul, section) {
   pointer-events: auto;
 }
 
+section:focus {
+  outline: none;
+}
+
 // Button styling
 .btn-primary {
   transition:
