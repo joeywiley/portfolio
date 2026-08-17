@@ -169,7 +169,7 @@ function resizeCanvas() {
   canvas.width = width * dpr
   canvas.height = height * dpr
 
-  ctx = canvas.getContext('2d', { alpha: false })!
+  ctx = canvas.getContext('2d', { alpha: true })!
   ctx.scale(dpr, dpr)
 
   const num_particles = width * height * (DENSITY / 10000)
