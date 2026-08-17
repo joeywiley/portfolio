@@ -19,6 +19,8 @@ const PULL_RADIUS = 500
 const INTERACT_MULTIPLIER = 4
 const SCROLL_STRENGTH = 0.0001
 
+let resize_observer: ResizeObserver | null = null
+
 let width: number
 let height: number
 
@@ -156,13 +158,13 @@ const scale = (input: number, input_min: number, input_max: number, output_min: 
 }
 
 function resizeCanvas() {
-  console.log('Hello')
   const canvas = canvasRef.value!
 
-  width = canvasRef.value!.clientWidth
-  height = canvasRef.value!.clientHeight
+  const rect = canvas.getBoundingClientRect()
   const dpr = window.devicePixelRatio || 1
-  const num_particles = width * height * (DENSITY / 10000)
+
+  width = rect.width
+  height = rect.height
 
   canvas.width = width * dpr
   canvas.height = height * dpr
@@ -170,6 +172,7 @@ function resizeCanvas() {
   ctx = canvas.getContext('2d', { alpha: false })!
   ctx.scale(dpr, dpr)
 
+  const num_particles = width * height * (DENSITY / 10000)
   if (particles.length == 0) {
     particles = createParticles(num_particles)
   } else if (particles.length > num_particles) {
@@ -196,13 +199,15 @@ function draw() {
 onMounted(() => {
   resizeCanvas()
   animate()
-  window.addEventListener('resize', resizeCanvas)
+
+  resize_observer = new ResizeObserver(() => resizeCanvas())
+  resize_observer.observe(canvasRef.value!)
+
   window.addEventListener('mousemove', handleMouseMove)
 })
 
 onUnmounted(() => {
   cancelAnimationFrame(current_animation_frame)
-  window.removeEventListener('resize', resizeCanvas)
   window.removeEventListener('mousemove', handleMouseMove)
 })
 
