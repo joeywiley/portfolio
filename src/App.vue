@@ -1,7 +1,9 @@
 <template>
-  <ParticleCanvas ref="canvasRef" class="particle-canvas" />
+  <div class="particle-canvas-wrapper">
+    <ParticleCanvas ref="canvasRef" class="particle-canvas" />
+  </div>
+  <SiteHeader />
   <div class="content-wrapper" @mousedown.self="handleMouseDown" @mouseup="handleMouseUp">
-    <SiteHeader />
     <section id="title" ref="titleRef" class="title-page">
       <TitlePage />
     </section>
@@ -10,10 +12,10 @@
       <AboutSection />
       <ContactSection />
     </section>
-    <Transition name="fade">
-      <ScrollButton class="top-button" icon="keyboard_arrow_up" label="TOP" section="title" v-if="showTopButton" />
-    </Transition>
   </div>
+  <Transition name="fade">
+    <ScrollButton class="top-button" icon="keyboard_arrow_up" label="TOP" section="title" v-if="showTopButton" />
+  </Transition>
 </template>
 
 <script setup lang="ts">
@@ -54,11 +56,17 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.particle-canvas {
+.particle-canvas-wrapper {
   position: fixed;
   z-index: -10;
   width: 100lvw;
-  height: 100lvh;
+  height: calc(100lvh + 60px); // to extend under safari search bar
+}
+
+.particle-canvas {
+  z-index: -10;
+  width: 100%;
+  height: 100%;
 }
 
 .content-wrapper {
@@ -66,7 +74,6 @@ onUnmounted(() => {
   padding-bottom: env(safe-area-inset-bottom);
   width: 100%;
   height: auto;
-  touch-action: pan-y;
   pointer-events: auto;
 }
 
