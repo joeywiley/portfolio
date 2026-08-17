@@ -20,9 +20,10 @@ nav {
   left: 0;
   justify-content: space-between;
   align-items: center;
+  gap: $header-gap;
   z-index: 20;
   background: linear-gradient(to bottom, color.adjust($bg, $alpha: -0.5) 0%, transparent 100%);
-  padding: 24px 48px; // 24 or 28?
+  padding: $gutters-v $gutters-h;
 }
 
 .nav-name {

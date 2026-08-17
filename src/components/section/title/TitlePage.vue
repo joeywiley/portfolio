@@ -22,7 +22,7 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 48px;
+  padding: 0 $gutters-h;
   max-width: 900px;
   min-height: 100vh;
 
@@ -75,7 +75,7 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
 
 .scroll-hint {
   position: absolute;
-  bottom: 24px;
-  left: 48px;
+  bottom: $gutters-v;
+  left: $gutters-h;
 }
 </style>
