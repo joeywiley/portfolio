@@ -2,9 +2,9 @@
   <nav>
     <span class="nav-name">Joey Wiley</span>
     <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#work" class="btn-tertiary">Work</a></li>
+      <li><a href="#about" class="btn-tertiary">About</a></li>
+      <li><a href="#contact" class="btn-tertiary">Contact</a></li>
     </ul>
   </nav>
 </template>
@@ -34,31 +34,6 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: 36px;
-  margin-left: 36px;
-
-  a {
-    position: relative;
-    transition: color 0.2s ease;
-    color: $text-secondary;
-    font-weight: 500;
-    font-size: 1.4rem;
-    letter-spacing: 0.01em;
-
-    // Extend clickable boundary
-    &::after {
-      position: absolute;
-      top: -20px;
-      right: -20px;
-      bottom: -20px;
-      left: -20px;
-      content: '';
-    }
-
-    &:hover,
-    &:focus-visible {
-      color: $text-primary;
-    }
-  }
+  gap: $header-gap;
 }
 </style>
