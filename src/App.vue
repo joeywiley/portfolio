@@ -79,18 +79,18 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .particle-canvas-wrapper {
   position: fixed;
-  z-index: -10;
   width: 100lvw;
   height: calc(100lvh + 60px); // to extend under safari search bar
 }
 
 .particle-canvas {
-  z-index: -10;
   width: 100%;
   height: 100%;
 }
 
 .content-wrapper {
+  position: relative;
+  z-index: 10;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   width: 100%;
