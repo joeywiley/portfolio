@@ -6,11 +6,11 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
-  icon: String,
-  label: String,
-  section: String,
-})
+const props = defineProps<{
+  icon: string
+  label: string
+  section: string
+}>()
 </script>
 
 <style lang="scss" scoped>
