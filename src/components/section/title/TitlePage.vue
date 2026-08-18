@@ -7,10 +7,8 @@
       <a href="#work" class="btn-primary">See my work</a>
       <a href="#contact" class="btn-secondary">Get in touch</a>
     </div>
-    <div class="scroll-cue"></div>
+    <ScrollButton class="scroll-hint" icon="keyboard_arrow_down" label="SCROLL" section="work" />
   </div>
-
-  <ScrollButton class="scroll-hint" icon="keyboard_arrow_down" label="SCROLL" section="work" />
 </template>
 
 <script lang="ts" setup>
@@ -20,6 +18,7 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
 <style lang="scss" scoped>
 .hero {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   padding: 0 $gutters-h;
@@ -71,6 +70,10 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
   align-items: center;
   gap: 16px;
   margin-top: 40px;
+
+  .btn-primary {
+    padding: 1.5rem 2rem;
+  }
 }
 
 .scroll-hint {
