@@ -19,7 +19,7 @@ const PARTICLE_CONFIG = {
 } as const
 
 const DEPTH_PHYSICS = {
-  base_speed_near: 0.00009,
+  base_speed_near: 0.00004,
   base_speed_far: 0,
   friction_near: 0.9,
   friction_far: 0.75,
