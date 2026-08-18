@@ -16,12 +16,20 @@ interface Button {
   type: string
 }
 
-const props = defineProps<{
-  image?: string
-  name: string
-  description: string
-  buttons: Button[]
-}>()
+const props = withDefaults(
+  defineProps<{
+    image?: string
+    name?: string
+    description?: string
+    buttons?: Button[]
+  }>(),
+  {
+    image: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
+    name: 'Project title',
+    description: 'Project description',
+    buttons: () => [],
+  },
+)
 </script>
 
 <style lang="scss" scoped>

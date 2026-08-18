@@ -5,7 +5,7 @@
       <ProjectTile
         image="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flogosmarcas.net%2Fwp-content%2Fuploads%2F2020%2F09%2FGoogle-Emblema.png&f=1&nofb=1&ipt=3e3c81690a8c66ee60441fbcd28de3250b3041b2ad886a92575369d997cdabf3"
         name="Gooble"
-        description="goober"
+        description="did you know gooble.com redirects to google"
         :buttons="[
           { type: 'primary', label: 'More', link: 'https://gooble.com' },
           { type: 'secondary', label: 'About', link: 'https://gooble.com' },
