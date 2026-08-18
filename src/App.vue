@@ -106,5 +106,6 @@ onUnmounted(() => {
   position: fixed;
   right: $gutters-h;
   bottom: $gutters-v;
+  z-index: 20;
 }
 </style>
