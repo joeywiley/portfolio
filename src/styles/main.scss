@@ -36,20 +36,6 @@ body {
   }
 }
 
-div,
-nav,
-ul,
-section {
-  pointer-events: none;
-}
-
-div > *:not(div, nav, ul, section),
-nav > *:not(div, nav, ul, section),
-ul > *:not(div, nav, ul, section),
-section > *:not(div, nav, ul, section) {
-  pointer-events: auto;
-}
-
 section:not(#title) {
   margin-top: max(60px, calc($gutters-v * 2 + 19.5px));
   scroll-margin-top: max(60px, calc($gutters-v * 2 + 19.5px));
