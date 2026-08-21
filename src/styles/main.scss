@@ -65,8 +65,8 @@ section:focus {
     background 0.2s ease,
     color 0.2s ease,
     box-shadow 0.2s ease;
-  border: 4px solid $accent;
-  background: $accent;
+  border: 4px solid $bg-accent;
+  background: $bg-accent;
   color: $text-accent;
   font-weight: 600;
   font-size: 1.4rem;
@@ -74,9 +74,9 @@ section:focus {
   font-family: $font-body;
 
   &:hover {
-    box-shadow: 0 8px 24px color.adjust($accent, $alpha: -0.75);
+    box-shadow: 0 8px 24px color.adjust($bg-accent, $alpha: -0.75);
     background: transparent;
-    color: $accent;
+    color: $bg-accent;
   }
 }
 

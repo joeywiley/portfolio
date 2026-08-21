@@ -1,18 +1,18 @@
-$bg: black;
-$text-accent: #000000;
+$bg: #000000;
+$bg-accent: #e8c87e;
 $text-primary: #f2efe9;
 $text-secondary: #a8a29b;
 $text-tertiary: #6b675f;
-$accent: #e8c87e;
-$panel: rgba(255, 255, 255, 0.045);
-$panel-border: rgba(255, 255, 255, 0.1);
-$divider: rgba(255, 255, 255, 0.1);
+$text-accent: #000000;
+$panel: rgb(255 255 255 / 4.5%);
+$panel-border: rgb(255 255 255 / 10%);
+$divider: rgb(255 255 255 / 10%);
 
 $font-accent: 'Fraunces', serif;
 $font-body: 'Inter', sans-serif;
 $font-mono: 'JetBrains Mono', monospace;
 
-$scrollbar: rgba(255, 255, 255, 0.2);
+$scrollbar: rgb(255 255 255 / 20%);
 
 $shadow:
   0 0 0.5em black,
@@ -21,7 +21,7 @@ $shadow:
 
 $header-gap: clamp(2rem, 2vw, 3.6rem);
 
-$gutters-v: clamp(1rem, 3vh, 3rem);
+$gutters-v: clamp(1rem, 1.7vw, 3rem);
 $gutters-h: clamp(2rem, 2.5vw, 4.8rem);
 
 $gap-xs: 0.8rem;

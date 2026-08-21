@@ -34,7 +34,7 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
     text-shadow: $shadow;
 
     .dot {
-      color: $accent;
+      color: $bg-accent;
       user-select: none;
     }
   }
@@ -50,7 +50,7 @@ import ScrollButton from '@/components/common/ScrollButton.vue'
     text-shadow: $shadow;
 
     em {
-      color: $accent;
+      color: $bg-accent;
       font-style: italic;
     }
   }
