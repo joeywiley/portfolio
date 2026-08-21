@@ -19,7 +19,7 @@ const PARTICLE_CONFIG = {
 } as const
 
 const DEPTH_PHYSICS = {
-  base_speed_near: 0.00004,
+  base_speed_near: 0.00005,
   base_speed_far: 0,
   friction_near: 0.9,
   friction_far: 0.75,
@@ -74,7 +74,7 @@ function pickWeightedColor() {
 
 function createParticles(quantity: number): Particle[] {
   const particles: Particle[] = []
-  const speedRange = DEPTH_PHYSICS.base_speed_far - DEPTH_PHYSICS.base_speed_near
+  const speedRange = (DEPTH_PHYSICS.base_speed_far - DEPTH_PHYSICS.base_speed_near) * (2000 / document.documentElement.clientWidth)
 
   for (let i = 0; i < quantity; i++) {
     const z = Math.random()
