@@ -3,7 +3,7 @@
     <img :src="$props.image ? $props.image : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" />
     <h3>{{ $props.name }}</h3>
     <p>{{ $props.description }}</p>
-    <div class="bottom">
+    <div class="actions" v-if="$props.buttons && $props.buttons.length > 0">
       <a v-for="button in props.buttons" :key="button.link" :class="'btn-' + button.type" :href="button.link">{{ button.label }}</a>
     </div>
   </div>
@@ -42,7 +42,7 @@ const props = withDefaults(
   gap: $gap-sm;
   backdrop-filter: blur(10px) saturate(1.6);
   outline: 1px solid $divider;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgb(255 255 255 / 1%);
   isolation: isolate;
   padding: $gap-md;
   overflow: hidden;
@@ -81,7 +81,7 @@ const props = withDefaults(
     letter-spacing: -0.01em;
   }
 
-  .bottom {
+  .actions {
     display: flex;
     flex-direction: row;
     align-items: center;
