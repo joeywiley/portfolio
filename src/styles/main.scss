@@ -19,6 +19,10 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+img {
+  user-select: none;
+}
+
 // Disable pointer events for containers to allow playing with background
 @media (hover: hover) and (pointer: fine) {
   div,

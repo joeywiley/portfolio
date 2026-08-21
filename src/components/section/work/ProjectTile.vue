@@ -1,6 +1,6 @@
 <template>
   <div class="tile">
-    <img :src="$props.image ? $props.image : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" />
+    <img :src="$props.image ? $props.image : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" draggable="false" />
     <h3>{{ $props.name }}</h3>
     <p>{{ $props.description }}</p>
     <div class="actions" v-if="$props.buttons && $props.buttons.length > 0">
