@@ -40,7 +40,7 @@ const props = withDefaults(
   justify-content: space-between;
   align-items: stretch;
   gap: $gap-sm;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px) saturate(1.6);
   outline: 1px solid $divider;
   background: rgba(255, 255, 255, 0.05);
   isolation: isolate;
