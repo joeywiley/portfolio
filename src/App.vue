@@ -14,7 +14,7 @@
     </section>
   </div>
   <Transition name="fade">
-    <ScrollButton class="top-button" icon="keyboard_arrow_up" label="TOP" section="title" v-if="showTopButton" />
+    <ScrollButton class="top-button" icon="keyboard_arrow_up" label="TOP" section="title" v-show="showTopButton" />
   </Transition>
 </template>
 
