@@ -29,7 +29,7 @@ const INTERACTION_CONFIG = {
   pull_strength: 0.01,
   pull_radius: 500, // px
   drag_strength_mul: 4,
-  scroll_strength: 0.0001,
+  scroll_strength: 0.00005,
 } as const
 
 let resize_observer: ResizeObserver | null = null
